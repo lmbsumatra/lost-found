@@ -3,7 +3,10 @@ const db = require("./db_connection");
 const seeds = require("./seeds");
 const schema = require("./schemas");
 
-// working minsan haha idk why
+// all that are commented are not functioning well when added "await" or "promise" for each db.execute, not seeding and 
+// when removed, like below, not functioning well too, but there are times that it does seeds
+// might use a faker(?) rather so it doesnt get 'duplicate entry' error
+// different command for truncating table
 
 // async function resetTables(table) {
 //   const tableName = getTableName(table);
