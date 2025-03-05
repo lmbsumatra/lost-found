@@ -2,10 +2,10 @@
 require("dotenv").config();
 
 // db
-const db = require("./src/db/drizzle/db.js");
+const db = require("./src/db/drizzle/db_connection.js");
 
 // schema
-const { schema } = require("./src/db/drizzle/schemas/schema.js");
+const { schema } = require("./src/db/drizzle/schemas/index.js");
 
 const express = require("express");
 const app = express();
@@ -26,7 +26,7 @@ app.post("/insert", async (req, res) => {
     }
 
     // insert into usertry table
-    await db.insert(schema.userTable).values({ name, age });
+    await db.insert(schema.usersTable).values({ name, age });
 
 
     return res.status(201).json({ message: "User inserted successfully!" });

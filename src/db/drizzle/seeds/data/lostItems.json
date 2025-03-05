@@ -1,0 +1,18 @@
+[
+  {
+    "userId": 1,
+    "name": "Black Wallet",
+    "description": "Leather wallet with cards",
+    "category": "Personal",
+    "locationLost": "Mall",
+    "status": "pending"
+  },
+  {
+    "userId": 2,
+    "name": "Silver Necklace",
+    "description": "Engraved with 'Forever'",
+    "category": "Accessories",
+    "locationLost": "Park",
+    "status": "pending"
+  }
+]

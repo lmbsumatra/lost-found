@@ -2,7 +2,7 @@ require("dotenv").config();
 const mysql = require("mysql2/promise");
 const { drizzle } = require("drizzle-orm/mysql2");
 
-// only pool works, idk why!!!
+// only pool works, idk why, pero sabi sa documentation, for single connection lang yung createConnection... >...<
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_UN,

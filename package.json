@@ -6,7 +6,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "db:generate": "npx drizzle-kit generate --config=./src/db/drizzle.config.js",
     "db:drop":  "npx drizzle-kit drop --config=./src/db/drizzle.config.js" ,
-    "db:migrate": "node ./src/db/drizzle/migrate.js"
+    "db:migrate": "node ./src/db/drizzle/migrate.js",
+    "db:seed:foundItems": "node ./src/db/drizzle/seeds/foundItemsSeeder.js",
+    "db:seed:users": "node ./src/db/drizzle/seeds/userSeeder.js",
+    "db:seed": "node ./src/db/drizzle/seed.js"
+
 
   },
   "keywords": [],

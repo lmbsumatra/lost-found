@@ -1,7 +1,7 @@
 const { defineConfig } = require("drizzle-kit");
 
 module.exports = defineConfig({
-  schema: "./src/db/drizzle/schemas/schemas.js",
+  schema: "./src/db/drizzle/schemas/index.js",
   out: "./src/db/drizzle/migrations",
   dialect: "mysql",
   dbCredentials: {
