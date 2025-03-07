@@ -14,7 +14,7 @@ const lostItemsTable = mysqlTable("lost_items", {
   userId: int("user_id").notNull(),
   name: varchar("name", { length: 255 }).notNull(),
   description: text("description"),
-  category: mysqlEnum("categories", [
+  category: mysqlEnum("category", [
     "Others",
     "Personal",
     "Electronics",
@@ -28,7 +28,7 @@ const lostItemsTable = mysqlTable("lost_items", {
   ]).default("Others"),
   locationLost: varchar("location_lost", { length: 255 }),
   dateLost: timestamp("date_lost", { mode: "date" }),
-  status: mysqlEnum("statuses", ["pending", "matched", "resolved"]).default(
+  status: mysqlEnum("status", ["pending", "matched", "resolved"]).default(
     "pending"
   ),
   createdAt: timestamp("created_at").notNull().defaultNow(),
@@ -48,4 +48,4 @@ const lostItemsRelations = (tables) => {
   }));
 };
 
-module.exports = { lostItemsTable, lostItemsRelations };
+module.exports = { lostItemsTable };

@@ -1,9 +1,10 @@
 const db = require("../db_connection");
 const { usersTable } = require("../schemas");
-const users = require("./data/user.json");
+const { generateFakeUsers } = require("./data/user");
 
 const seedUsers = async () => {
   try {
+    const users = generateFakeUsers(10);
     await db.insert(usersTable).values(users);
   } catch (error) {
     console.log("error: ", error);
@@ -12,10 +13,6 @@ const seedUsers = async () => {
   }
 };
 
-if (require.main === module) {
-  seedUsers().finally(() => {
-    process.exit();
-  });
-}
+seedUsers();
 
 module.exports = { seedUsers };

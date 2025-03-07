@@ -30,4 +30,4 @@ const usersRelations = (tables) => {
   }));
 };
 
-module.exports = { usersTable, usersRelations };
+module.exports = { usersTable };

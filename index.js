@@ -10,28 +10,19 @@ const { schema } = require("./src/db/drizzle/schemas/index.js");
 const express = require("express");
 const app = express();
 
-app.use(express.json()); 
+app.use(express.json());
 
-app.post("/insert", async (req, res) => {
+app.get("/", async (req, res) => {
   try {
-    const { name, age } = req.body; 
+    const users = await db
+      .select({ id: schema.usersTable.id })
+      .from(schema.usersTable);
 
-    // validate inputs
-    if (!name || !age) {
-      return res.status(400).json({ error: "Both name and age are required." });
-    }
-
-    if (isNaN(age) || age <= 0) {
-      return res.status(400).json({ error: "Age must be a positive number." });
-    }
-
-    // insert into usertry table
-    await db.insert(schema.usersTable).values({ name, age });
-
-
-    return res.status(201).json({ message: "User inserted successfully!" });
+    return res
+      .status(200)
+      .json({ message: "Users retrieved successfully!", users });
   } catch (error) {
-    console.error("Insert Error:", error);
+    console.error("Select Error:", error);
     return res.status(500).json({ error: "Internal server error." });
   }
 });

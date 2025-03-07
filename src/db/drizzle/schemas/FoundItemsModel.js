@@ -14,7 +14,7 @@ const foundItemsTable = mysqlTable("found_items", {
   name: varchar("name", { length: 255 }).notNull(),
   userId: int("user_id").notNull(),
   description: text("description"),
-  category: mysqlEnum("categories", [
+  category: mysqlEnum("category", [
     "Others",
     "Personal",
     "Electronics",
@@ -28,7 +28,7 @@ const foundItemsTable = mysqlTable("found_items", {
   ]).default("Others"),
   locationFound: varchar("location_found", { length: 255 }),
   dateFound: timestamp("date_found", { mode: "date" }),
-  status: mysqlEnum("statuses", ["pending", "matched", "resolved"]).default(
+  status: mysqlEnum("status", ["pending", "matched", "resolved"]).default(
     "pending"
   ),
   createdAt: timestamp("created_at").notNull().defaultNow(),
@@ -48,4 +48,4 @@ const foundItemsRelations = (tables) => {
   }));
 };
 
-module.exports = { foundItemsTable, foundItemsRelations };
+module.exports = { foundItemsTable };

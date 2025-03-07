@@ -5,19 +5,19 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "db:generate": "npx drizzle-kit generate --config=./src/db/drizzle.config.js",
-    "db:drop":  "npx drizzle-kit drop --config=./src/db/drizzle.config.js" ,
+    "db:drop": "npx drizzle-kit drop --config=./src/db/drizzle.config.js",
     "db:migrate": "node ./src/db/drizzle/migrate.js",
     "db:seed:foundItems": "node ./src/db/drizzle/seeds/foundItemsSeeder.js",
+    "db:seed:lostItems": "node ./src/db/drizzle/seeds/lostItemsSeeder.js",
     "db:seed:users": "node ./src/db/drizzle/seeds/userSeeder.js",
     "db:seed": "node ./src/db/drizzle/seed.js"
-
-
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@faker-js/faker": "^9.5.1",
     "drizzle-orm": "^0.40.0",
     "express": "^4.21.2",
     "mysql2": "^3.12.0"

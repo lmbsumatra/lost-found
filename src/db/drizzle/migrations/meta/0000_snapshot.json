@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "9737636e-3389-4eb6-a1f9-c892dd136780",
+  "id": "ee631f76-2443-4525-8fa1-86ed3d172e5f",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "users": {
@@ -109,8 +109,8 @@
           "notNull": false,
           "autoincrement": false
         },
-        "categories": {
-          "name": "categories",
+        "category": {
+          "name": "category",
           "type": "enum('Others','Personal','Electronics','Gadgets','Documents','ID','Wearables','Accessories','Clothing','School Materials')",
           "primaryKey": false,
           "notNull": false,
@@ -131,8 +131,8 @@
           "notNull": false,
           "autoincrement": false
         },
-        "statuses": {
-          "name": "statuses",
+        "status": {
+          "name": "status",
           "type": "enum('pending','matched','resolved')",
           "primaryKey": false,
           "notNull": false,
@@ -199,8 +199,8 @@
           "notNull": false,
           "autoincrement": false
         },
-        "categories": {
-          "name": "categories",
+        "category": {
+          "name": "category",
           "type": "enum('Others','Personal','Electronics','Gadgets','Documents','ID','Wearables','Accessories','Clothing','School Materials')",
           "primaryKey": false,
           "notNull": false,
@@ -221,8 +221,8 @@
           "notNull": false,
           "autoincrement": false
         },
-        "statuses": {
-          "name": "statuses",
+        "status": {
+          "name": "status",
           "type": "enum('pending','matched','resolved')",
           "primaryKey": false,
           "notNull": false,

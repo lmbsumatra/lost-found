@@ -59,6 +59,7 @@ const schema = require("./schemas");
 //   }
 // })();
 
-seeds.seedUsers();
-seeds.seedFoundItems();
-seeds.seedLostItems();
+// nvm, better to seed per table than all at once
+// seeds.seedUsers();
+// seeds.seedFoundItems();
+// seeds.seedLostItems();

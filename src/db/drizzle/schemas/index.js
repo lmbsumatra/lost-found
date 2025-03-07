@@ -1,6 +1,6 @@
-const { foundItemsTable, foundItemsRelations } = require("./FoundItemsModel");
-const { lostItemsTable, lostItemsRelations } = require("./LostItemsModel");
-const { usersTable, usersRelations } = require("./UserModel");
+const { foundItemsTable } = require("./FoundItemsModel");
+const { lostItemsTable } = require("./LostItemsModel");
+const { usersTable } = require("./UserModel");
 
 const schema = {
   usersTable,
@@ -8,4 +8,4 @@ const schema = {
   foundItemsTable,
 };
 
-module.exports = schema;
+module.exports = { schema };
