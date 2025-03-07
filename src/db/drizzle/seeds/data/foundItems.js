@@ -15,17 +15,17 @@ const getUserIdsFromDB = async () => {
 };
 
 const generateFakeFoundItems = async (count = 10) => {
-  const userIds = await getUserIdsFromDB();
+  // const userIds = await getUserIdsFromDB();
   const dateFound = faker.date.past();
 
-  if (userIds.length === 0) {
-    throw new Error(
-      "No users found in the database. Cannot generate found items."
-    );
-  }
+  // if (userIds.length === 0) {
+  //   throw new Error(
+  //     "No users found in the database. Cannot generate found items."
+  //   );
+  // }
 
   return Array.from({ length: count }, () => ({
-    userId: faker.helpers.arrayElement(userIds),
+    userId: 1,
     name: faker.commerce.productName(),
     category: faker.helpers.arrayElement([
       "Others",

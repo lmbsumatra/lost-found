@@ -1,10 +1,10 @@
 const db = require("../db_connection");
-const { usersTable } = require("../schemas");
+const { usersTable } = require("../schemas/UserModel");
 const { generateFakeUsers } = require("./data/user");
 
 const seedUsers = async () => {
   try {
-    const users = generateFakeUsers(10);
+    const users = await generateFakeUsers(1);
     await db.insert(usersTable).values(users);
   } catch (error) {
     console.log("error: ", error);
