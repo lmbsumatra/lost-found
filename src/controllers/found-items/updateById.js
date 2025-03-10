@@ -5,6 +5,10 @@ const updateById = async (req, res) => {
   const id = req.params.id;
   console.log(updates, id);
 
+  if (typeof updates.dateFound === "string") {
+    updates.dateFound = new Date(updates.dateFound);
+  }
+
   // check id
   if (!id || isNaN(id)) {
     return res.status(400).json({ error: "Valid Id is required." });

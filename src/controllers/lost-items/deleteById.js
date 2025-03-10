@@ -6,10 +6,10 @@ const deleteItem = async (req, res) => {
   if (!req.params.itemId || !itemId) {
     res.status(400).json({ error: "userId is required." });
   }
-  const deletedUser = await db
+  const deletedLostItem = await db
     .delete(schema.lostItemsTable)
     .where(eq(schema.lostItemsTable.id, itemId));
-  res.send({ deletedUser });
+  res.send({ deletedLostItem });
 };
 
 module.exports = { deleteItem };

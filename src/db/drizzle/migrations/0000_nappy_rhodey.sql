@@ -10,6 +10,20 @@ CREATE TABLE `users` (
 	CONSTRAINT `users_email_unique` UNIQUE(`email`)
 );
 --> statement-breakpoint
+CREATE TABLE `found_items` (
+	`id` serial AUTO_INCREMENT NOT NULL,
+	`name` varchar(255) NOT NULL,
+	`user_id` int NOT NULL,
+	`description` text,
+	`category` enum('Others','Personal','Electronics','Gadgets','Documents','ID','Wearables','Accessories','Clothing','School Materials') DEFAULT 'Others',
+	`location_found` varchar(255),
+	`date_found` timestamp,
+	`status` enum('pending','matched','resolved') DEFAULT 'pending',
+	`created_at` timestamp NOT NULL DEFAULT (now()),
+	`updated_at` timestamp,
+	CONSTRAINT `found_items_id` PRIMARY KEY(`id`)
+);
+--> statement-breakpoint
 CREATE TABLE `lost_items` (
 	`id` serial AUTO_INCREMENT NOT NULL,
 	`user_id` int NOT NULL,
@@ -24,16 +38,5 @@ CREATE TABLE `lost_items` (
 	CONSTRAINT `lost_items_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
-CREATE TABLE `found_items` (
-	`id` serial AUTO_INCREMENT NOT NULL,
-	`name` varchar(255) NOT NULL,
-	`user_id` int NOT NULL,
-	`description` text,
-	`category` enum('Others','Personal','Electronics','Gadgets','Documents','ID','Wearables','Accessories','Clothing','School Materials') DEFAULT 'Others',
-	`location_found` varchar(255),
-	`date_found` timestamp,
-	`status` enum('pending','matched','resolved') DEFAULT 'pending',
-	`created_at` timestamp NOT NULL DEFAULT (now()),
-	`updated_at` timestamp,
-	CONSTRAINT `found_items_id` PRIMARY KEY(`id`)
-);
+ALTER TABLE `found_items` ADD CONSTRAINT `found_items_user_id_users_id_fk` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE `lost_items` ADD CONSTRAINT `lost_items_user_id_users_id_fk` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE no action ON UPDATE no action;

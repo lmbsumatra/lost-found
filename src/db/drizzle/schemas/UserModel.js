@@ -5,8 +5,6 @@ const {
   mysqlTable,
   timestamp,
 } = require("drizzle-orm/mysql-core");
-const { lostItemsTable } = require("./LostItemsModel");
-const { foundItemsTable } = require("./FoundItemsModel");
 const { relations } = require("drizzle-orm");
 
 const usersTable = mysqlTable("users", {
@@ -21,7 +19,7 @@ const usersTable = mysqlTable("users", {
   ),
 });
 
-// Defer relations to avoid circular dependencies
+// circular dependency: resolved: tabes should be define and import first then pass to create relations
 const usersRelations = (tables) => {
   const { lostItemsTable, foundItemsTable } = tables;
   return relations(usersTable, ({ many }) => ({
@@ -30,4 +28,4 @@ const usersRelations = (tables) => {
   }));
 };
 
-module.exports = { usersTable };
+module.exports = { usersTable, usersRelations };

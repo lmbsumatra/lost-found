@@ -1,17 +1,20 @@
-const { 
-  timestamp, 
-  text, 
-  mysqlEnum, 
-  varchar, 
-  int, 
-  mysqlTable, 
-  serial 
+const {
+  timestamp,
+  text,
+  mysqlEnum,
+  varchar,
+  int,
+  mysqlTable,
+  serial,
 } = require("drizzle-orm/mysql-core");
 const { relations } = require("drizzle-orm");
+const { usersTable } = require("./UserModel");
 
 const lostItemsTable = mysqlTable("lost_items", {
   id: serial("id").primaryKey(),
-  userId: int("user_id").notNull(),
+  userId: int("user_id")
+    .notNull()
+    .references(() => usersTable.id), // circular dependency warning: resolve: changed order of imports on schema
   name: varchar("name", { length: 255 }).notNull(),
   description: text("description"),
   category: mysqlEnum("category", [
@@ -37,7 +40,7 @@ const lostItemsTable = mysqlTable("lost_items", {
   ),
 });
 
-// Defer relations to avoid circular dependencies
+// circular dependency: resolved: tabes should be define and import first then pass to create relations
 const lostItemsRelations = (tables) => {
   const { usersTable } = tables;
   return relations(lostItemsTable, ({ one }) => ({
@@ -48,4 +51,4 @@ const lostItemsRelations = (tables) => {
   }));
 };
 
-module.exports = { lostItemsTable };
+module.exports = { lostItemsTable, lostItemsRelations };

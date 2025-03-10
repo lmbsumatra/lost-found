@@ -1,7 +1,12 @@
-const { db, schema } = require("../../constants");
+const { db } = require("../../constants");
 
 const getAll = async (req, res) => {
-  const items = await db.select().from(schema.foundItemsTable);
+ 
+  const items = await db.query.foundItemsTable.findMany({
+    with: {
+      user: { columns: { id: true } },
+    },
+  });
   res.send({ items });
 };
 

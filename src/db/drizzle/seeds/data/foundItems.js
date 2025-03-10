@@ -1,6 +1,6 @@
 const { faker } = require("@faker-js/faker");
 const db = require("../../db_connection");
-const { schema } = require("../../schemas");
+const schema = require("../../schemas");
 
 const getUserIdsFromDB = async () => {
   try {
@@ -9,23 +9,23 @@ const getUserIdsFromDB = async () => {
       .from(schema.usersTable);
     return users.map((user) => user.id);
   } catch (error) {
-    console.error("❌ Error fetching user IDs:", error);
+    console.error("Error fetching user IDs:", error);
     return [];
   }
 };
 
 const generateFakeFoundItems = async (count = 10) => {
-  // const userIds = await getUserIdsFromDB();
+  const userIds = await getUserIdsFromDB();
   const dateFound = faker.date.past();
 
-  // if (userIds.length === 0) {
-  //   throw new Error(
-  //     "No users found in the database. Cannot generate found items."
-  //   );
-  // }
+  if (userIds.length === 0) {
+    throw new Error(
+      "No users found in the database. Cannot generate found items."
+    );
+  }
 
   return Array.from({ length: count }, () => ({
-    userId: 1,
+    userId: faker.helpers.arrayElement(userIds),
     name: faker.commerce.productName(),
     category: faker.helpers.arrayElement([
       "Others",
