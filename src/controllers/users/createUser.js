@@ -2,6 +2,7 @@ const { db, schema } = require("../../constants");
 const validator = require("../../validators");
 
 const bcrypt = require("bcrypt");
+const validate = require("../../validators/validate");
 const saltRounds = 10;
 
 const create = async (req, res) => {
@@ -28,25 +29,15 @@ const create = async (req, res) => {
   }
 
   // start validation of fields
-  const errors = [];
-  const nameError = validator.nameValidator(name);
-  if (nameError) {
-    errors.push(nameError);
-  }
-  const emailError = validator.emailValidator(email);
-  if (emailError) {
-    errors.push(emailError);
-  }
-  const passwordError = validator.passwordValidator(password);
-  if (passwordError) {
-    errors.push(passwordError);
-  }
+  const validationErrors = await validate(
+    { name, email, phone, password },
+    validator.userSchemaValidation
+  );
 
-  // return error, if has invalid field, to prevent creation
-  if (errors.length !== 0) {
+  if (validationErrors.length > 0) {
     return res.status(400).json({
-      error: "Validation failed",
-      details: errors,
+      error: "User validation has failed",
+      details: validationErrors,
     });
   }
 
