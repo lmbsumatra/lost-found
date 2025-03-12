@@ -1,5 +1,3 @@
-const validator = require("./index");
-
 const validate = async (data, schema) => {
   const errors = [];
 
