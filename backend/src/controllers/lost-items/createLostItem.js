@@ -1,5 +1,6 @@
 const { db, schema } = require("../../constants");
 const validator = require("../../validators");
+const validate = require("../../validators/validate");
 const create = async (req, res) => {
   const requiredFields = [
     "name",
@@ -9,6 +10,7 @@ const create = async (req, res) => {
     "dateLost",
   ];
   const { name, description, category, locationLost, dateLost } = req.body;
+  const userId = req.token;
 
   // check if all required fields are present and not empty/null
   if (
@@ -30,32 +32,15 @@ const create = async (req, res) => {
   }
 
   // start validation of fields
-  const errors = [];
-  const nameError = validator.nameValidator(name);
-  if (nameError) {
-    errors.push(nameError);
-  }
-  const userIdError = await validator.userIdValidator(req.token);
-  if (userIdError) {
-    errors.push(userIdError);
-  }
-  const categoryError = validator.categoryValidator(category);
-  if (categoryError) {
-    errors.push(categoryError);
-  }
-  const locationError = validator.locationValidator(locationLost);
-  if (locationError) {
-    errors.push(locationError);
-  }
-  const dateError = validator.dateValidator(dateLost);
-  if (dateError) {
-    errors.push(dateError);
-  }
-  // return error, if has invalid field, to prevent creation
-  if (errors.length !== 0) {
+  const validationErrors = await validate(
+    { name, userId, description, category, locationLost, dateLost },
+    validator.lostItemValidation
+  );
+
+  if (validationErrors.length > 0) {
     return res.status(400).json({
-      error: "Validation failed",
-      details: errors,
+      error: "Found item validation has failed",
+      details: validationErrors,
     });
   }
 

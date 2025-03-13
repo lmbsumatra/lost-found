@@ -29,10 +29,19 @@ const foundItemValidation = {
   description: validator.descriptionValidator,
 };
 
+const lostItemValidation = {
+  name: validator.nameValidator,
+  userId: validator.userIdValidator,
+  category: validator.categoryValidator,
+  locationLost: validator.locationValidator,
+  dateLost: validator.dateValidator,
+  description: validator.descriptionValidator,
+};
+
 const userSchemaValidation = {
   name: validator.nameValidator,
   email: validator.emailValidator,
   password: validator.passwordValidator,
 };
 
-module.exports = { foundItemValidation, userSchemaValidation };
+module.exports = { foundItemValidation, userSchemaValidation,lostItemValidation };
