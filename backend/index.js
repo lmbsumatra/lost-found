@@ -1,5 +1,6 @@
 // get env
 require("dotenv").config();
+const cors = require("cors");
 
 const { app, express } = require("./src/constants.js");
 
@@ -8,6 +9,9 @@ const FoundItemsRoutes = require("./src/routers/FoundItemsRoutes.js");
 const LostItemsRoutes = require("./src/routers/LostItemsRoutes.js");
 const UsersRoutes = require("./src/routers/UsersRoutes.js");
 const MatchRoutes = require("./src/routers/MatchRoutes.js");
+
+app.use(cors({ origin: "http://localhost:3006", credentials: true }));
+app.use(cors());
 
 app.use(express.json());
 

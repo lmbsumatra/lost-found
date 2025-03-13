@@ -1,4 +1,8 @@
 lws_lost_found/
 
-/node_modules
+/backend/node_modules
 .qodo
+
+/src
+
+/frontend/node_modules
