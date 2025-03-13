@@ -15,7 +15,11 @@ const getFoundItemMatch = async (req, res) => {
       });
 
       if (!foundItem) {
-        return res.status(404).send({ serror: "Item not found" });
+        res.status(500).json({
+          message: "Found item not found",
+          error: error.message,
+          stack: error.stack,
+        });
       }
 
       const lostItems = await db.query.lostItemsTable.findMany({});
@@ -31,9 +35,13 @@ const getFoundItemMatch = async (req, res) => {
 
       matches.sort((a, b) => b.score - a.score);
 
-      res.send({ matches: [{ foundItem, score }] });
+      res.send({ matches: [{ foundItem, matches: matches[0] }] });
     } catch (error) {
-      res.status(500).send({ error: "Item not found" });
+      res.status(500).json({
+        message: "Match item not found",
+        error: error.message,
+        stack: error.stack,
+      });
     }
   }
 };

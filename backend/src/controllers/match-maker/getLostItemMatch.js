@@ -6,6 +6,7 @@ const getLostItemMatch = async (req, res) => {
   const userId = req.token;
   const itemId = req.params.itemId;
 
+
   if (!itemId || isNaN(itemId)) {
     res.status(500).send({ error: "Invalid Item Id" });
   } else {
@@ -15,7 +16,11 @@ const getLostItemMatch = async (req, res) => {
       });
 
       if (!lostItem) {
-        return res.status(404).send({ serror: "Item not found" });
+        res.status(500).json({
+          message: "Lost Item not found",
+          error: error.message,
+          stack: error.stack,
+        });
       }
 
       const foundItems = await db.query.foundItemsTable.findMany({});
@@ -33,7 +38,11 @@ const getLostItemMatch = async (req, res) => {
 
       res.send({ matches: [{ lostItem, matches: matches[0] }] });
     } catch (error) {
-      res.status(500).send({ error: "Item not found" });
+      res.status(500).json({
+        message: "Match Item not found",
+        error: error.message,
+        stack: error.stack,
+      });
     }
   }
 };
